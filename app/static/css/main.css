@@ -8,6 +8,22 @@
  * 6BBF59 (Mantis)
  */
 
+.list-group{
+    padding-left: 5rem !important;
+    padding-right: 5rem;
+    padding-top: 2.5rem;
+    padding-bottom: 6.5rem;
+}
+
+.list-group-item{
+    color: #262626 !important;
+}
+
+.badge{
+    color: #FCFAF9 !important;
+    background-color: #0B6E4F;
+}
+
 .navbar{
     background-color: #262626;
 }
