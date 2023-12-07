@@ -1,0 +1,28 @@
+/* PALETA DE COLORES */
+
+/*
+ * 0B6E4F (Dartmouth grenn)
+ * 262626 (Eerie black)
+ * FCFAF9 (Seasalt)
+ * 08A045 (Pigment green)
+ * 6BBF59 (Mantis)
+ */
+
+.navbar{
+    background-color: #262626;
+}
+
+.navbar-text{
+    padding-left: 0.5rem;
+    font-size: large;
+    color: #FCFAF9 !important;
+}
+
+.navbar-brand{
+    padding-right: 0rem;
+    color: #FCFAF9 !important;
+}
+
+body{
+    background-color: #0B6E4F !important;
+}

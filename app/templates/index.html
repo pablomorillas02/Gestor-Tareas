@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 
+{% block navbar %} 
+    {% include 'navbar.html' %}
+{% endblock %}
+
 {% block content %}
-<h1>Gestor de Tareas</h1>
-<!-- Contenido de tu página de inicio -->
+    <h1>Gestor de Tareas</h1>
+    <!-- Contenido de tu página de inicio -->
+{% endblock %}
+
+{% block footer %}
+    {% include 'footer.html' %}
 {% endblock %}
