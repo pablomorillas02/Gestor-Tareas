@@ -1,2 +1,2 @@
-# Gestor-Tareas
+# Gestor de Tareas
  Gestor de tareas en Flask
