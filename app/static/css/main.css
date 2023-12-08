@@ -8,12 +8,6 @@
  * 6BBF59 (Mantis)
  */
 
-.text-center{
-    color: #FCFAF9 !important;
-    padding-top: 5rem;
-    font-size: xx-large;
-}
-
 .list-group{
     padding-left: 5rem !important;
     padding-right: 5rem;
@@ -77,6 +71,27 @@
     color: #FCFAF9 !important;
     background-color: #0B6E4F !important;
     border-color: #0B6E4F !important;
+}
+
+.container-fluid{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 75vh;
+}
+
+.fa-clipboard{
+    font-size: 2000% !important;
+    opacity: 50%;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #6BBF59;
+}
+
+.text-center{
+    color: #6BBF59 !important;
+    font-size: xx-large;
+    font-weight: bold;
+    opacity: 50%;
 }
 
 .navbar-brand{

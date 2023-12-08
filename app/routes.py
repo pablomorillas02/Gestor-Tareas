@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, request, redirect, url_for, jsonify
+from flask import render_template, request, jsonify
 import uuid
 from app.json_util import get_tasks, write_tasks
 
@@ -22,7 +22,7 @@ def add():
     
     write_tasks(tasks)
         
-    return redirect(url_for('index'))
+    return jsonify(success=True, task=task)
 
 @app.route('/delete_task', methods=['POST'])
 def delete():
