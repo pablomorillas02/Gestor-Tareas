@@ -1,0 +1,17 @@
+[
+    {
+        "id": "f8b8205b-9561-11ee-9b78-b42e992b1d2e",
+        "titulo": "Tarea 1",
+        "completada": false
+    },
+    {
+        "id": "fa8a826d-9561-11ee-b16b-b42e992b1d2e",
+        "titulo": "Tarea 2",
+        "completada": false
+    },
+    {
+        "id": "fc477826-9561-11ee-a83b-b42e992b1d2e",
+        "titulo": "Tarea 3",
+        "completada": false
+    }
+]

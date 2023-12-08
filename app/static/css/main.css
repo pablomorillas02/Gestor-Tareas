@@ -34,6 +34,34 @@
     color: #FCFAF9 !important;
 }
 
+.navbar-form {
+    display: flex;
+    align-items: center;
+    padding-right: 0.5rem;
+}
+
+.navbar-form .form-control,
+.navbar-form .btn {
+    margin-left: 0.5rem;
+}
+
+.form-control{
+    color: #262626 !important;
+    background-color: #FCFAF9 !important;
+    border: #FCFAF9 !important;
+}
+
+.btn-outline-success{
+    --bs-btn-color: #0B6E4F !important;
+    --bs-btn-border-color: #0B6E4F !important;  
+}
+
+.btn-outline-success:hover{
+    color: #FCFAF9 !important;
+    background-color: #0B6E4F !important;
+    border-color: #0B6E4F !important;
+}
+
 .navbar-brand{
     padding-right: 0rem;
     color: #FCFAF9 !important;
