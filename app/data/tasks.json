@@ -1,17 +1,1 @@
-[
-    {
-        "id": "f8b8205b-9561-11ee-9b78-b42e992b1d2e",
-        "titulo": "Tarea 1",
-        "completada": false
-    },
-    {
-        "id": "fa8a826d-9561-11ee-b16b-b42e992b1d2e",
-        "titulo": "Tarea 2",
-        "completada": false
-    },
-    {
-        "id": "fc477826-9561-11ee-a83b-b42e992b1d2e",
-        "titulo": "Tarea 3",
-        "completada": false
-    }
-]
+[{"id": "ff67fe77-95b4-11ee-a5a2-b42e992b1d2e", "titulo": "Fregar los platos", "completada": false}, {"id": "02a804e4-95b5-11ee-baa1-b42e992b1d2e", "titulo": "Sacar al perro", "completada": false}, {"id": "0868f48a-95b5-11ee-a499-b42e992b1d2e", "titulo": "Limpiar el ba\u00f1o", "completada": false}]

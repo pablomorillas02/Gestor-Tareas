@@ -8,11 +8,21 @@
  * 6BBF59 (Mantis)
  */
 
+.text-center{
+    color: #FCFAF9 !important;
+    padding-top: 5rem;
+    font-size: xx-large;
+}
+
 .list-group{
     padding-left: 5rem !important;
     padding-right: 5rem;
     padding-top: 2.5rem;
     padding-bottom: 6.5rem;
+}
+
+.completed_task{
+    text-decoration: line-through;
 }
 
 .list-group-item{
@@ -63,8 +73,13 @@
 }
 
 .navbar-brand{
+    font-size: small !important;
     padding-right: 0rem;
     color: #FCFAF9 !important;
+}
+
+.navbar-brand:hover, .navbar-brand:active {
+    text-decoration: underline;
 }
 
 body{

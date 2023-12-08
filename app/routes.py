@@ -1,13 +1,11 @@
 from app import app
-from flask import render_template, request
-from app.models import read_tasks
+from flask import render_template, request, redirect, url_for
 import uuid
-import json
-import os
+from app.json_util import get_tasks, write_tasks
 
 @app.route('/')
 def index():
-    tasks = read_tasks()
+    tasks = get_tasks()
     
     return render_template('index.html', tasks=tasks)
 
@@ -18,14 +16,37 @@ def add():
     id = str(uuid.uuid1())
     task = {'id': id, 'titulo': data, 'completada': False}
     
-    path = os.path.join(os.path.dirname(__file__), 'data', 'tasks.json')
-    
-    with open(path, 'r') as f:
-        tasks = json.load(f)
+    tasks = get_tasks()
         
     tasks.append(task)
     
-    with open(path, 'w') as f:
-        json.dump(tasks, f)
+    write_tasks(tasks)
         
-    return render_template('index.html', tasks=tasks)
+    return redirect(url_for('index'))
+
+@app.route('/delete_task', methods=['POST'])
+def delete():
+    task_id = request.form['task_id']
+    
+    tasks = get_tasks()
+        
+    tasks = [task for task in tasks if task['id'] != task_id]
+    
+    write_tasks(tasks)
+        
+    return redirect(url_for('index'))
+
+@app.route('/complete_task', methods=['POST'])
+def complete():
+    task_id = request.form['task_id']
+    
+    tasks = get_tasks()
+        
+    for task in tasks:
+        if task['id'] == task_id:
+            task['completada'] = not task['completada']
+            break
+    
+    write_tasks(tasks)
+        
+    return redirect(url_for('index'))
