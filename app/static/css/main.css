@@ -29,9 +29,16 @@
     color: #262626 !important;
 }
 
-.badge{
-    color: #FCFAF9 !important;
-    background-color: #0B6E4F;
+#check_button{
+    --bs-btn-border-radius: 20% 0% 0% 20%;    
+}
+
+#edit_button{
+    --bs-btn-border-radius: 0% 0% 0% 0%;    
+}
+
+#delete_button{
+    --bs-btn-border-radius: 0% 20% 20% 0%;    
 }
 
 .navbar{
