@@ -67,7 +67,7 @@ function viewTask(task, firstTask) {
         var tasksList = $('<ul></ul>').addClass('list-group');
         tasksList.append(newTask);
 
-        $('.container-fluid').hide('fade', 50, function () {
+        $('.container-fluid').hide('fade', 200, function () {
             console.log('Animación completada');
             $('body').append(tasksList);
         });
@@ -157,23 +157,28 @@ function deleteTask(event, taskId) {
                 var task = document.getElementById('task_text_' + taskId);
 
                 if (task) {
-                    console.log("Elemento encontrado:", task);
+                    if (data.lastTask == false) {
+                        console.log("Elemento encontrado:", task);
 
-                    var task_card = $('#' + taskId);
-                    task_card.hide('fade', 100, function () {
-                        $(this).remove();
+                        var task_card = document.getElementById(taskId);
 
-                        var task = $('#task_text_' + taskId);
+                        task_card.remove();
                         task.remove();
+                    } else {
+                        console.log("Elemento encontrado:", task);
 
-                        var lastTask = data.lastTask;
+                        var task_card = $('#' + taskId);
+                        task_card.hide('fade', 100, function () {
+                            $(this).remove();
 
-                        if (lastTask) {
+                            var task = $('#task_text_' + taskId);
+                            task.remove();
+
                             $('.list-group').remove();
 
                             $('.container-fluid').show('fade', 200);
-                        }
-                    });
+                        });
+                    }
                 }
             }
         })

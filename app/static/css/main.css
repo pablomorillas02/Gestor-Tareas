@@ -82,7 +82,7 @@
 
 .fa-clipboard{
     font-size: 2000% !important;
-    opacity: 50%;
+    opacity: 30%;
     padding-bottom: 1rem;
     border-bottom: 2px solid #6BBF59;
 }
@@ -91,7 +91,18 @@
     color: #6BBF59 !important;
     font-size: xx-large;
     font-weight: bold;
-    opacity: 50%;
+    opacity: 30%;
+}
+
+#help-button{
+    padding-left: 0.5rem;
+}
+
+#help{
+    background-color: #6BBF59;
+    border-bottom: #6BBF59;
+    color: #262626;
+    font-weight: bolder;
 }
 
 .navbar-brand{
