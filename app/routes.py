@@ -18,11 +18,13 @@ def add():
     
     tasks = get_tasks()
         
+    firstTask = False if(tasks) else True
+        
     tasks.append(task)
     
     write_tasks(tasks)
         
-    return jsonify(success=True, task=task)
+    return jsonify(success=True, task=task, firstTask=firstTask)
 
 @app.route('/delete_task', methods=['POST'])
 def delete():
@@ -32,9 +34,11 @@ def delete():
         
     tasks = [task for task in tasks if task['id'] != task_id]
     
+    lastTask = False if(tasks) else True
+    
     write_tasks(tasks)
         
-    return jsonify(success=True)
+    return jsonify(success=True, lastTask=lastTask)
 
 @app.route('/complete_task', methods=['POST'])
 def complete():

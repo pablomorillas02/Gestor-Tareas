@@ -1,4 +1,4 @@
-function viewTask(task) {
+function viewTask(task, firstTask) {
     var newTask = $('<li></li>')
         .addClass('list-group-item d-flex justify-content-between align-items-center')
         .attr('id', task.id);
@@ -62,7 +62,19 @@ function viewTask(task) {
 
     newTask.append(taskText, buttons);
 
-    $('.list-group').append(newTask);
+    if (firstTask || $('.list-group').length === 0) {
+        console.log('Lista vacía, vamos a crear una');
+        var tasksList = $('<ul></ul>').addClass('list-group');
+        tasksList.append(newTask);
+
+        $('.container-fluid').hide('fade', 50, function () {
+            console.log('Animación completada');
+            $('body').append(tasksList);
+        });
+
+    } else {
+        $('.list-group').append(newTask);
+    }
 }
 
 function addTask(event) {
@@ -83,7 +95,8 @@ function addTask(event) {
                 console.log('Éxito (creación)');
 
                 var newTask = data.task;
-                viewTask(newTask);
+                var firstTask = data.firstTask;
+                viewTask(newTask, firstTask);
             }
         })
         .catch(error => {
@@ -146,9 +159,21 @@ function deleteTask(event, taskId) {
                 if (task) {
                     console.log("Elemento encontrado:", task);
 
-                    var task_card = document.getElementById(taskId);
-                    task_card.remove();
-                    task.remove();
+                    var task_card = $('#' + taskId);
+                    task_card.hide('fade', 100, function () {
+                        $(this).remove();
+
+                        var task = $('#task_text_' + taskId);
+                        task.remove();
+
+                        var lastTask = data.lastTask;
+
+                        if (lastTask) {
+                            $('.list-group').remove();
+
+                            $('.container-fluid').show('fade', 200);
+                        }
+                    });
                 }
             }
         })
