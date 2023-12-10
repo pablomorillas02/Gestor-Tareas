@@ -1,6 +1,52 @@
 {% extends 'base.html' %}
 
+{% block navbar %} 
+    {% include 'navbar.html' %}
+{% endblock %}
+
 {% block content %}
-<h1>Gestor de Tareas</h1>
-<!-- Contenido de tu página de inicio -->
+    {% if tasks: %}
+        <ul class="list-group">
+            {% for task in tasks %}
+                <li id="{{ task['id'] }}" class="list-group-item d-flex justify-content-between align-items-center">
+                    <span id="task_text_{{ task['id'] }}" class="{{ 'completed_task' if task['completada'] else 'uncompleted_task' }}">
+                        {{ task['titulo'] }}
+                    </span>
+                    <div class="btn-group">
+                        <form action="/complete_task" method="POST">
+                            <input type="hidden" name="task_id" value= {{ task['id'] }}> </input>
+                            <button type="submit" class="btn btn-success" id="check_button" onclick="completeTask(event, '{{ task['id'] }}')"> 
+                                <i class="fa-solid fa-check" style="color: #FCFA9;"></i> 
+                            </button>
+                        </form>
+                        <form action="/edit_task" method="POST">
+                            <input type="hidden" name="task_id" value= {{ task['id'] }}> </input>
+                            <button type="button" class="btn btn-primary" id="edit_button"> 
+                                <i class="fa-regular fa-pen-to-square" style="color: #FCFA9;"></i> 
+                            </button>
+                        </form>
+                        <form action="/delete_task" method="POST">
+                            <input type="hidden" name="task_id" value= {{ task['id'] }}> </input>
+                            <button type="submit" class="btn btn-danger" id="delete_button" onclick="deleteTask(event, '{{ task['id'] }}')"> 
+                                <i class="fa-solid fa-x" style="color: #FCFA9;"></i>
+                            </button>
+                        </form>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else: %}
+        <div class="container-fluid">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-auto">
+                    <i class="fa-regular fa-clipboard" style="color: #6BBF59"></i>
+                    <p class="text-center">Añade tareas</p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block footer %}
+    {% include 'footer.html' %}
 {% endblock %}
