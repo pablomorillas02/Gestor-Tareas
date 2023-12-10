@@ -1,3 +1,4 @@
+// Esta función construye la vista del listado de tareas
 function viewTask(task, firstTask) {
     var newTask = $('<li></li>')
         .addClass('list-group-item d-flex justify-content-between align-items-center')
@@ -62,6 +63,7 @@ function viewTask(task, firstTask) {
 
     newTask.append(taskText, buttons);
 
+    // Aquí se comprueba si es la primera tarea, si lo es se crea un listado nuevo
     if (firstTask || $('.list-group').length === 0) {
         console.log('Lista vacía, vamos a crear una');
         var tasksList = $('<ul></ul>').addClass('list-group');
@@ -77,6 +79,7 @@ function viewTask(task, firstTask) {
     }
 }
 
+// Esta función sirve para añadir una tarea
 function addTask(event) {
     event.preventDefault();
 
@@ -96,7 +99,7 @@ function addTask(event) {
 
                 var newTask = data.task;
                 var firstTask = data.firstTask;
-                viewTask(newTask, firstTask);
+                viewTask(newTask, firstTask); // Se construye la vista
             }
         })
         .catch(error => {
@@ -104,6 +107,7 @@ function addTask(event) {
         });
 }
 
+// Esta función sirve para marcar o desmarcar una tarea
 function completeTask(event, taskId) {
     event.preventDefault();
 
@@ -124,6 +128,7 @@ function completeTask(event, taskId) {
                 if (task) {
                     console.log("Elemento encontrado:", task);
 
+                    // Aquí se comprueba si se marca o se desmarca y se actualiza la vista
                     if (task.classList.contains('uncompleted_task')) {
                         task.classList.remove('uncompleted_task');
                         task.classList.add('completed_task');
@@ -139,6 +144,7 @@ function completeTask(event, taskId) {
         });
 }
 
+// Esta función sirve para borrar una tarea
 function deleteTask(event, taskId) {
     event.preventDefault();
 
@@ -157,6 +163,7 @@ function deleteTask(event, taskId) {
                 var task = document.getElementById('task_text_' + taskId);
 
                 if (task) {
+                    // Aquí se comprueba si la tarea borrada es la última
                     if (data.lastTask == false) {
                         console.log("Elemento encontrado:", task);
 
@@ -164,7 +171,7 @@ function deleteTask(event, taskId) {
 
                         task_card.remove();
                         task.remove();
-                    } else {
+                    } else { // Si es la última, se aplican una serie de animaciones
                         console.log("Elemento encontrado:", task);
 
                         var task_card = $('#' + taskId);
