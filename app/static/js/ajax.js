@@ -29,8 +29,6 @@ function viewTask(task, firstTask) {
     completeForm.append(completeInput, completeButton);
 
     var editForm = $('<form></form>')
-        .attr('action', '/edit_task')
-        .attr('method', 'POST');
     var editInput = $('<input>')
         .attr('type', 'hidden')
         .attr('name', 'task_id')
@@ -39,7 +37,10 @@ function viewTask(task, firstTask) {
         .addClass('btn btn-primary')
         .attr('id', 'edit_button')
         .attr('type', 'button')
-        .html('<i class="fa-regular fa-pen-to-square" style="color: #FCFAF9;"></i>');
+        .html('<i class="fa-regular fa-pen-to-square" style="color: #FCFAF9;"></i>')
+        .click(function(event) {
+            editTask(task.id, task.titulo);
+        });
     editForm.append(editInput, editButton);
 
     var deleteForm = $('<form></form>')
@@ -65,12 +66,10 @@ function viewTask(task, firstTask) {
 
     // Aquí se comprueba si es la primera tarea, si lo es se crea un listado nuevo
     if (firstTask || $('.list-group').length === 0) {
-        console.log('Lista vacía, vamos a crear una');
         var tasksList = $('<ul></ul>').addClass('list-group');
         tasksList.append(newTask);
 
         $('.container-fluid').hide('fade', 200, function () {
-            console.log('Animación completada');
             $('body').append(tasksList);
         });
 
@@ -95,8 +94,6 @@ function addTask(event) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                console.log('Éxito (creación)');
-
                 var newTask = data.task;
                 var firstTask = data.firstTask;
                 viewTask(newTask, firstTask); // Se construye la vista
@@ -121,13 +118,9 @@ function completeTask(event, taskId) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                console.log('Éxito (actualización de estado)');
-
                 var task = document.getElementById('task_text_' + taskId);
 
                 if (task) {
-                    console.log("Elemento encontrado:", task);
-
                     // Aquí se comprueba si se marca o se desmarca y se actualiza la vista
                     if (task.classList.contains('uncompleted_task')) {
                         task.classList.remove('uncompleted_task');
@@ -158,22 +151,16 @@ function deleteTask(event, taskId) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                console.log('Éxito (borrado)');
-
                 var task = document.getElementById('task_text_' + taskId);
 
                 if (task) {
                     // Aquí se comprueba si la tarea borrada es la última
                     if (data.lastTask == false) {
-                        console.log("Elemento encontrado:", task);
-
                         var task_card = document.getElementById(taskId);
 
                         task_card.remove();
                         task.remove();
                     } else { // Si es la última, se aplican una serie de animaciones
-                        console.log("Elemento encontrado:", task);
-
                         var task_card = $('#' + taskId);
                         task_card.hide('fade', 100, function () {
                             $(this).remove();
@@ -183,6 +170,7 @@ function deleteTask(event, taskId) {
 
                             $('.list-group').remove();
 
+                            $('.container-fluid').removeAttr("hidden");
                             $('.container-fluid').show('fade', 200);
                         });
                     }
@@ -196,15 +184,13 @@ function deleteTask(event, taskId) {
 
 // Esta función sirve para editar una tarea
 function send_edit_task(taskId) {
-    var inputId = '#new_task_text_' + taskId;
-    var inputElement = $(inputId);
-    var inputData = inputElement.val();
+    var input_id = '#new_task_text_' + taskId;
+    var input_element = $(input_id);
+    var input_data = input_element.val();
 
     var formData = new FormData();
     formData.append('task_id', taskId);
-    formData.append('new_task_text', inputData);
-
-    console.log(inputData);
+    formData.append('new_task_text', input_data);
 
     fetch('/edit_task', {
         method: 'POST',
@@ -213,10 +199,9 @@ function send_edit_task(taskId) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                console.log('Éxito (modificación)');
-
-                var taskTextDivId = '#task_text_' + taskId;
-                $(taskTextDivId).html(inputData);
+                var new_task_text = '#task_text_' + taskId;
+                $(new_task_text).html(input_data);
+                $(new_task_text).attr('data-current-text', input_data);
             }
         })
         .catch(error => {

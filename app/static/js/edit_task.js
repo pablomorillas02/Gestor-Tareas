@@ -1,5 +1,6 @@
 function editTask(taskId, titulo) {
-    console.log('Editando ' + titulo);
+    var task_text_div_id = '#task_text_' + taskId;
+    var current_text = $(task_text_div_id).attr('data-current-text') || titulo;
 
     $('#task_text_' + taskId).html('');
 
@@ -37,7 +38,7 @@ function editTask(taskId, titulo) {
         'class': 'form-control',
         'id': 'new_task_text_' + taskId,
         'size': 30,
-        'value': titulo
+        'value': current_text
     })
     .appendTo('#input_div_' + taskId);
 
