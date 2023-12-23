@@ -19,7 +19,7 @@
                                 <i class="fa-solid fa-check" style="color: #FCFAF9"></i> 
                             </button>
                         </form>
-                        <form action="/edit_task" method="POST">
+                        <form>
                             <input type="hidden" name="task_id" value= {{ task['id'] }}> </input>
                             <button type="button" class="btn btn-primary" id="edit_button" onclick="editTask('{{ task['id'] }}', '{{ task['titulo'] }}')"> 
                                 <i class="fa-regular fa-pen-to-square" style="color: #FCFAF9"></i> 

@@ -193,3 +193,33 @@ function deleteTask(event, taskId) {
             console.error('Error:', error);
         });
 }
+
+// Esta función sirve para editar una tarea
+function send_edit_task(taskId) {
+    var inputId = '#new_task_text_' + taskId;
+    var inputElement = $(inputId);
+    var inputData = inputElement.val();
+
+    var formData = new FormData();
+    formData.append('task_id', taskId);
+    formData.append('new_task_text', inputData);
+
+    console.log(inputData);
+
+    fetch('/edit_task', {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                console.log('Éxito (modificación)');
+
+                var taskTextDivId = '#task_text_' + taskId;
+                $(taskTextDivId).html(inputData);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });    
+}

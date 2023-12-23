@@ -59,3 +59,24 @@ def complete():
     write_tasks(tasks)
         
     return jsonify(success=True)
+
+# Método para modificar una tarea
+@app.route('/edit_task', methods=['POST'])
+def edit():
+    try:
+        task_id = request.form['task_id']
+        new_text = request.form['new_task_text']
+
+        tasks = get_tasks()
+
+        for task in tasks:
+            if task['id'] == task_id:
+                task['titulo'] = new_text
+                break
+
+        write_tasks(tasks)
+
+        return jsonify(success=True)
+    except Exception as e:
+        print("Ocurrió un error:", e)
+        return jsonify(success=False, error=str(e)), 500

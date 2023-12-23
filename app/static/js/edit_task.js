@@ -1,22 +1,33 @@
-/*
-<div class="input-group mb-3">
-  <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
-  <div class="input-group-append">
-    <span class="input-group-text" id="basic-addon2">@example.com</span>
-  </div>
-</div>
- */
-
 function editTask(taskId, titulo) {
+    console.log('Editando ' + titulo);
+
     $('#task_text_' + taskId).html('');
 
-    //Creación del div
+    // Creación del div
     $('<div></div>')
     .attr({
       'class': 'input-group',
       'id': 'input_div_' + taskId
     })
     .appendTo('#task_text_' + taskId);
+
+    // Creación de un formulario para poder mandar las solicitudes POST
+    $('<form></form>')
+    .attr({
+      'id': 'edit_form_' + taskId,
+      'action': '/edit_task',
+      'method': 'POST'
+    })
+    .appendTo('#input_div_' + taskId);
+
+    // Input para guardar la id
+    $('<input></input>')
+    .attr({
+      'type': 'hidden',
+      'name': 'task_id',
+      'value': taskId
+    })
+    .appendTo('#input_div_' + taskId);
 
     // Creación del input
     $('<input></input>')
@@ -43,7 +54,8 @@ function editTask(taskId, titulo) {
     .attr({
         'type': 'submit',
         'id': 'confirm_edit_' + taskId,
-        'class': 'btn btn-success'
+        'class': 'btn btn-success',
+        'onclick': 'send_edit_task("' + taskId + '")'
     })
     .appendTo('#input_div_' + taskId);
 
@@ -56,16 +68,3 @@ function editTask(taskId, titulo) {
 
     $('#confirm_edit_' + taskId).focus();
 }
-
-/*
-$(document).on('blur','#task_text_' + taskId, function(){
-    var name = $(this).val();
-    $.ajax({
-      type: 'post',
-      url: '/edit_task',
-      success: function(){
-        $('#task_text_' + taskId).text(name);
-      }
-    });
-});
-*/
