@@ -15,18 +15,21 @@ def index():
 def add():
     data = request.form['data']
     
-    id = str(uuid.uuid1())
-    task = {'id': id, 'titulo': data, 'completada': False}
-    
-    tasks = get_tasks()
+    if(data):
+        id = str(uuid.uuid1())
+        task = {'id': id, 'titulo': data, 'completada': False}
         
-    firstTask = False if(tasks) else True
+        tasks = get_tasks()
+            
+        firstTask = False if(tasks) else True
+            
+        tasks.append(task)
         
-    tasks.append(task)
-    
-    write_tasks(tasks)
-        
-    return jsonify(success=True, task=task, firstTask=firstTask)
+        write_tasks(tasks)
+            
+        return jsonify(success=True, task=task, firstTask=firstTask)
+    else:
+        return jsonify(success=False)
 
 # Método para borrar tareas del archivo
 @app.route('/delete_task', methods=['POST'])
