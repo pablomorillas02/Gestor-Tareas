@@ -16,7 +16,7 @@ Cada tarea puede ser:
 
 ![editada](img/editada.png)
 
-Y por último también puede ser **borrada***:
+Y por último también puede ser **borrada**:
 
 ## Instalación
 
