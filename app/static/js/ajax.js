@@ -88,6 +88,10 @@ function addTask(event) {
   var formData = new FormData();
   formData.append("data", taskText);
 
+  var popover = bootstrap.Popover.getInstance(
+    document.getElementById("addButton")
+  );
+
   fetch("/add", {
     method: "POST",
     body: formData,
@@ -95,13 +99,11 @@ function addTask(event) {
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
+        popover.hide();
         var newTask = data.task;
         var firstTask = data.firstTask;
         viewTask(newTask, firstTask); // Se construye la vista
       } else {
-        var popover = bootstrap.Popover.getInstance(
-          document.getElementById("addButton")
-        );
         if (popover) {
           popover.show();
           setTimeout(() => popover.hide(), 2000);
