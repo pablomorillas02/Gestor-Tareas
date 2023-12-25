@@ -1,4 +1,4 @@
-﻿#Gestor!
+﻿# Gestor!
 
 Gestor! es una aplicación web minimalista para gestionar un listado con las tareas a realizar. Ha sido implementado en __Flask__.
 
